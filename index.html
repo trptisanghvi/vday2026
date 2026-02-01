@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will you be my Valentine?</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>"> 
+</head>
+<body>
+    <input type="checkbox" id="yes-checkbox" class="hidden-checkbox">
+    
+    <div class="container">
+        <!-- Decorative hearts -->
+        <div class="heart heart1">💕</div>
+        <div class="heart heart2">💖</div>
+        <div class="heart heart3">💗</div>
+        <div class="heart heart4">💝</div>
+        <div class="heart heart5">💞</div>
+        
+        <!-- Decorative flowers -->
+        <div class="flower flower1">🌸</div>
+        <div class="flower flower2">🌺</div>
+        <div class="flower flower3">🌷</div>
+        <div class="flower flower4">🌹</div>
+        
+        <!-- Celebration hearts (hidden until Yes is clicked) -->
+        <div class="celebration-heart heart-celeb1">💕</div>
+        <div class="celebration-heart heart-celeb2">💖</div>
+        <div class="celebration-heart heart-celeb3">💗</div>
+        <div class="celebration-heart heart-celeb4">💝</div>
+        <div class="celebration-heart heart-celeb5">💞</div>
+        <div class="celebration-heart heart-celeb6">💓</div>
+        
+        <!-- Main content -->
+        <div class="content">
+            <h1 class="question">Arkin, will you be my valentine?</h1>
+            <div class="button-container">
+                <label for="yes-checkbox" class="btn yes-btn">Yes</label>
+                
+                <!-- Hover zones around No button to make it move -->
+                <div class="hover-zone zone-1"></div>
+                <div class="hover-zone zone-2"></div>
+                <div class="hover-zone zone-3"></div>
+                <div class="hover-zone zone-4"></div>
+                <div class="hover-zone zone-5"></div>
+                <div class="hover-zone zone-6"></div>
+                <div class="hover-zone zone-7"></div>
+                <div class="hover-zone zone-8"></div>
+                
+                <button class="btn no-btn">No</button>
+            </div>
+            
+            <!-- Success message (hidden until Yes is clicked) -->
+            <div class="success-message">
+                <h1 class="question" style="color: #ff6b9d; font-size: 3.5rem;">💕 Yay! 💕</h1>
+                <p style="font-size: 1.5rem; color: #8b4a6b; margin-top: 20px; font-style: italic;">
+                    I'm so happy! Happy Valentine's Day, Arkin! 💖
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
