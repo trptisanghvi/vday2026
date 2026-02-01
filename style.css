@@ -1,0 +1,501 @@
+@font-face {
+    font-family: 'Louise';
+    src: url('Louise.otf') format('opentype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Louise', serif;
+    background: linear-gradient(135deg, #ffeef7 0%, #fff5f8 50%, #ffeef7 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.hidden-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    text-align: center;
+    z-index: 10;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 600px;
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.question {
+    font-family: 'Louise', serif;
+    font-size: 3rem;
+    color: #8b4a6b;
+    margin-bottom: 40px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 60px;
+}
+
+.btn {
+    font-family: 'Louise', serif;
+    font-size: 1.5rem;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 400;
+    letter-spacing: 1px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-decoration: none;
+}
+
+.yes-btn {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+    color: white;
+    z-index: 20;
+}
+
+.yes-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+}
+
+.yes-btn:active {
+    transform: scale(0.98);
+}
+
+.no-btn {
+    background: linear-gradient(135deg, #d4a5b8 0%, #c99bb0 100%);
+    color: white;
+    position: fixed;
+    transition: all 0.3s ease;
+    z-index: 15;
+    /* Initial position */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Hover zones - invisible areas that trigger button movement */
+.hover-zone {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    z-index: 14;
+    pointer-events: auto;
+}
+
+/* Position hover zones around the button */
+.zone-1 {
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+
+.zone-2 {
+    left: calc(50% + 50px);
+    top: calc(50% - 100px);
+}
+
+.zone-3 {
+    left: calc(50% - 100px);
+    top: calc(50% + 50px);
+}
+
+.zone-4 {
+    left: calc(50% + 50px);
+    top: calc(50% + 50px);
+}
+
+.zone-5 {
+    left: calc(50% - 175px);
+    top: calc(50% - 25px);
+}
+
+.zone-6 {
+    left: calc(50% + 125px);
+    top: calc(50% - 25px);
+}
+
+.zone-7 {
+    left: calc(50% - 25px);
+    top: calc(50% - 175px);
+}
+
+.zone-8 {
+    left: calc(50% - 25px);
+    top: calc(50% + 125px);
+}
+
+/* Move button when hovering over zones - positions within viewport */
+.zone-1:hover ~ .no-btn {
+    left: 5% !important;
+    top: 15% !important;
+    transform: translate(0, 0) rotate(10deg) !important;
+}
+
+.zone-2:hover ~ .no-btn {
+    left: 75% !important;
+    top: 15% !important;
+    transform: translate(0, 0) rotate(-10deg) !important;
+}
+
+.zone-3:hover ~ .no-btn {
+    left: 5% !important;
+    top: 75% !important;
+    transform: translate(0, 0) rotate(-15deg) !important;
+}
+
+.zone-4:hover ~ .no-btn {
+    left: 75% !important;
+    top: 75% !important;
+    transform: translate(0, 0) rotate(15deg) !important;
+}
+
+.zone-5:hover ~ .no-btn {
+    left: 2% !important;
+    top: 45% !important;
+    transform: translate(0, 0) rotate(20deg) !important;
+}
+
+.zone-6:hover ~ .no-btn {
+    left: 78% !important;
+    top: 45% !important;
+    transform: translate(0, 0) rotate(-20deg) !important;
+}
+
+.zone-7:hover ~ .no-btn {
+    left: 40% !important;
+    top: 5% !important;
+    transform: translate(0, 0) rotate(25deg) !important;
+}
+
+.zone-8:hover ~ .no-btn {
+    left: 40% !important;
+    top: 85% !important;
+    transform: translate(0, 0) rotate(-25deg) !important;
+}
+
+/* Also move when directly hovering the button */
+.no-btn:hover {
+    left: 15% !important;
+    top: 25% !important;
+    transform: translate(0, 0) rotate(12deg) !important;
+}
+
+/* Keep button within bounds - ensure it never goes outside */
+.no-btn {
+    /* Button will use percentage-based positioning which keeps it in viewport */
+}
+
+/* Success message - hidden by default */
+.success-message {
+    display: none;
+}
+
+#yes-checkbox:checked ~ .container .content .question,
+#yes-checkbox:checked ~ .container .content .button-container {
+    display: none;
+}
+
+#yes-checkbox:checked ~ .container .content .success-message {
+    display: block;
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Celebration hearts animation */
+.celebration-heart {
+    position: fixed;
+    font-size: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+#yes-checkbox:checked ~ .container .heart-celeb1 {
+    animation: celebrate1 3s ease-out forwards;
+    animation-delay: 0.1s;
+}
+
+#yes-checkbox:checked ~ .container .heart-celeb2 {
+    animation: celebrate2 3s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+#yes-checkbox:checked ~ .container .heart-celeb3 {
+    animation: celebrate3 3s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+#yes-checkbox:checked ~ .container .heart-celeb4 {
+    animation: celebrate4 3s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+#yes-checkbox:checked ~ .container .heart-celeb5 {
+    animation: celebrate5 3s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+#yes-checkbox:checked ~ .container .heart-celeb6 {
+    animation: celebrate6 3s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+@keyframes celebrate1 {
+    0% {
+        left: 20%;
+        top: 100vh;
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        left: 20%;
+        top: -10vh;
+        opacity: 0;
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+@keyframes celebrate2 {
+    0% {
+        left: 40%;
+        top: 100vh;
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        left: 40%;
+        top: -10vh;
+        opacity: 0;
+        transform: translateY(0) rotate(-360deg);
+    }
+}
+
+@keyframes celebrate3 {
+    0% {
+        left: 60%;
+        top: 100vh;
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        left: 60%;
+        top: -10vh;
+        opacity: 0;
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+@keyframes celebrate4 {
+    0% {
+        left: 80%;
+        top: 100vh;
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        left: 80%;
+        top: -10vh;
+        opacity: 0;
+        transform: translateY(0) rotate(-360deg);
+    }
+}
+
+@keyframes celebrate5 {
+    0% {
+        left: 30%;
+        top: 100vh;
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        left: 30%;
+        top: -10vh;
+        opacity: 0;
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+@keyframes celebrate6 {
+    0% {
+        left: 70%;
+        top: 100vh;
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        left: 70%;
+        top: -10vh;
+        opacity: 0;
+        transform: translateY(0) rotate(-360deg);
+    }
+}
+
+/* Decorative hearts */
+.heart {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.6;
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.heart1 {
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.heart2 {
+    top: 20%;
+    right: 15%;
+    animation-delay: 1s;
+}
+
+.heart3 {
+    bottom: 15%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+.heart4 {
+    bottom: 25%;
+    right: 10%;
+    animation-delay: 3s;
+}
+
+.heart5 {
+    top: 50%;
+    left: 5%;
+    animation-delay: 4s;
+}
+
+/* Decorative flowers */
+.flower {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.5;
+    animation: float 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.flower1 {
+    top: 15%;
+    right: 20%;
+    animation-delay: 0.5s;
+}
+
+.flower2 {
+    bottom: 20%;
+    left: 15%;
+    animation-delay: 2.5s;
+}
+
+.flower3 {
+    top: 60%;
+    right: 8%;
+    animation-delay: 4.5s;
+}
+
+.flower4 {
+    bottom: 10%;
+    right: 30%;
+    animation-delay: 1.5s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .question {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        font-size: 1.2rem;
+        padding: 12px 30px;
+    }
+    
+    .content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .hover-zone {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Adjust zone positions for mobile */
+    .zone-1 {
+        left: calc(50% - 80px);
+        top: calc(50% - 80px);
+    }
+    
+    .zone-2 {
+        left: calc(50% + 30px);
+        top: calc(50% - 80px);
+    }
+    
+    .zone-3 {
+        left: calc(50% - 80px);
+        top: calc(50% + 30px);
+    }
+    
+    .zone-4 {
+        left: calc(50% + 30px);
+        top: calc(50% + 30px);
+    }
+}
